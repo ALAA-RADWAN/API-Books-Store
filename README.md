@@ -4,127 +4,16 @@ This API allows you to reserve a book.
 
 The API is available at `https://simple-books-api.glitch.me`
 
-## Endpoints ##
+First, I worked on the collection in Postman and used JavaScript to write the scripts. I implemented a full end-to-end scenario, from GET requests to DELETE.
 
-### Status ###
+I ran the collection using Postman Runner, but since the authentication required a new email every time, I solved that by creating a dynamic email using a timestamp I added in the Pre-request Script.
 
-GET `/status`
+Then I exported the environment and the collection, and ran it using Newman from the command prompt, and displayed the results in a beautiful HTML report.
 
-Returns the status of the API.
+After that, I used the same collection with Rest Assured to apply automation using Java, along with Rest Assured, TestNG, and Jackson dependencies. 
 
-### List of books ###
+Finally, I used Allure Report to display the results of the automation tests.
 
-GET `/books`
-
-Returns a list of books.
-
-Optional query parameters:
-
-- type: fiction or non-fiction
-- limit: a number between 1 and 20.
-
-
-### Get a single book ###
-
-GET `/books/:bookId`
-
-Retrieve detailed information about a book.
-
-
-### Submit an order ###
-
-POST `/orders`
-
-Allows you to submit a new order. Requires authentication.
-
-The request body needs to be in JSON format and include the following properties:
-
- - `bookId` - Integer - Required
- - `customerName` - String - Required
-
-Example
-```
-POST /orders/
-Authorization: Bearer <YOUR TOKEN>
-
-{
-  "bookId": 1,
-  "customerName": "John"
-}
-```
-
-The response body will contain the order Id.
-
-### Get all orders ###
-
-GET `/orders`
-
-Allows you to view all orders. Requires authentication.
-
-### Get an order ###
-
-GET `/orders/:orderId`
-
-Allows you to view an existing order. Requires authentication.
-
-### Update an order ###
-
-PATCH `/orders/:orderId`
-
-Update an existing order. Requires authentication.
-
-The request body needs to be in JSON format and allows you to update the following properties:
-
- - `customerName` - String
-
- Example
-```
-PATCH /orders/PF6MflPDcuhWobZcgmJy5
-Authorization: Bearer <YOUR TOKEN>
-
-{
-  "customerName": "John"
-}
-```
-
-### Delete an order ###
-
-DELETE `/orders/:orderId`
-
-Delete an existing order. Requires authentication.
-
-The request body needs to be empty.
-
- Example
-```
-DELETE /orders/PF6MflPDcuhWobZcgmJy5
-Authorization: Bearer <YOUR TOKEN>
-```
-
-## API Authentication ##
-
-To submit or view an order, you need to register your API client.
-
-POST `/api-clients/`
-
-The request body needs to be in JSON format and include the following properties:
-
- - `clientName` - String
- - `clientEmail` - String
-
- Example
-
- ```
- {
-    "clientName": "Postman",
-    "clientEmail": "valentin@example.com"
-}
- ```
-
-The response body will contain the access token. The access token is valid for 7 days.
-
-**Possible errors**
-
-Status code 409 - "API client already registered." Try changing the values for `clientEmail` and `clientName` to something else.
-
-#Reference (https://github.com/vdespa/introduction-to-postman-course/edit/main/simple-books-api.md) 
+The resources I learned from:
+ Postman: Valentine Despa | GitHub linkhttps://github.com/vdespa
+ Rest Assured: Raghav | automationstepbystep.com
